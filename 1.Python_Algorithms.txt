@@ -1,0 +1,814 @@
+###############################################
+Python Algorithms
+###############################################
+Here are 25 commonly used algorithms in Python:
+###############################################
+Linear Search
+Binary Search
+Bubble Sort
+Selection Sort
+Insertion Sort
+Merge Sort
+Quick Sort
+Heap Sort
+Radix Sort
+Counting Sort
+Breadth-First Search (BFS)
+Depth-First Search (DFS)
+Dijkstra's Algorithm
+A* Search Algorithm
+Kruskal's Algorithm
+Prim's Algorithm
+Bellman-Ford Algorithm
+Floyd-Warshall Algorithm
+Topological Sort
+Knapsack Problem (Dynamic Programming)
+Longest Common Subsequence (Dynamic Programming)
+Minimum Spanning Tree (MST)
+Graph Coloring
+K-means Clustering
+Convex Hull (Graham's Scan)
+####################################################################################################################
+These algorithms cover a range of concepts such as searching, sorting, graph algorithms, dynamic programming, and optimization problems. 
+####################################################################################################################
+Please note that this list is not exhaustive, and there are many other algorithms that are widely used in Python depending on the specific problem or domain.
+####################################################################################################################
+# Linear Search
+
+def linear_search(arr, target):
+    for i in range(len(arr)):
+        if arr[i] == target:
+            return i
+    return -1
+
+# Example usage
+arr = [5, 2, 9, 1, 7]
+target = 9
+print(linear_search(arr, target))  # Output: 2
+
+###############################################
+# Binary Search
+
+def binary_search(arr, target):
+    low = 0
+    high = len(arr) - 1
+
+    while low <= high:
+        mid = (low + high) // 2
+        if arr[mid] == target:
+            return mid
+        elif arr[mid] < target:
+            low = mid + 1
+        else:
+            high = mid - 1
+    return -1
+
+# Example usage
+arr = [1, 2, 5, 7, 9]
+target = 9
+print(binary_search(arr, target))  # Output: 4
+
+###############################################
+# Bubble Sort
+
+def bubble_sort(arr):
+    n = len(arr)
+    for i in range(n-1):
+        for j in range(n-i-1):
+            if arr[j] > arr[j+1]:
+                arr[j], arr[j+1] = arr[j+1], arr[j]
+
+# Example usage
+arr = [5, 2, 9, 1, 7]
+bubble_sort(arr)
+print(arr)  # Output: [1, 2, 5, 7, 9]
+
+###############################################
+# Selection Sort
+
+def selection_sort(arr):
+    n = len(arr)
+    for i in range(n-1):
+        min_index = i
+        for j in range(i+1, n):
+            if arr[j] < arr[min_index]:
+                min_index = j
+        arr[i], arr[min_index] = arr[min_index], arr[i]
+
+# Example usage
+arr = [5, 2, 9, 1, 7]
+selection_sort(arr)
+print(arr)  # Output: [1, 2, 5, 7, 9]
+
+###############################################
+# Insertion Sort
+
+def insertion_sort(arr):
+    n = len(arr)
+    for i in range(1, n):
+        key = arr[i]
+        j = i - 1
+        while j >= 0 and arr[j] > key:
+            arr[j + 1] = arr[j]
+            j -= 1
+        arr[j + 1] = key
+
+# Example usage
+arr = [5, 2, 9, 1, 7]
+insertion_sort(arr)
+print(arr)  # Output: [1, 2, 5, 7, 9]
+
+###############################################
+# Merge Sort
+
+def merge_sort(arr):
+    if len(arr) > 1:
+        mid = len(arr) // 2
+        left_half = arr[:mid]
+        right_half = arr[mid:]
+
+        merge_sort(left_half)
+        merge_sort(right_half)
+
+        i = j = k = 0
+
+        while i < len(left_half) and j < len(right_half):
+            if left_half[i] < right_half[j]:
+                arr[k] = left_half[i]
+                i += 1
+            else:
+                arr[k] = right_half[j]
+                j += 1
+            k += 1
+
+        while i < len(left_half):
+            arr[k] = left_half[i]
+            i += 1
+            k += 1
+
+        while j < len(right_half):
+            arr[k] = right_half[j]
+            j += 1
+            k += 1
+
+# Example usage
+arr = [5, 2, 9, 1, 7]
+merge_sort(arr)
+print(arr)  # Output: [1, 2, 5, 7, 9]
+
+###############################################
+# Quick Sort
+
+def quick_sort(arr):
+    if len(arr) <= 1:
+        return arr
+    else:
+        pivot = arr[0]
+        less = [x for x in arr[1:] if x <= pivot]
+        greater = [x for x in arr[1:] if x > pivot]
+        return quick_sort(less) + [pivot] + quick_sort(greater)
+
+# Example usage
+arr = [5, 2, 9, 1, 7]
+sorted_arr = quick_sort(arr)
+print(sorted_arr)  # Output: [1, 2, 5, 7, 9]
+
+###############################################
+# Heap Sort
+
+def heapify(arr, n, i):
+    largest = i
+    left = 2 * i + 1
+    right = 2 * i + 2
+
+    if left < n and arr[i] < arr[left]:
+        largest = left
+
+    if right < n and arr[largest] < arr[right]:
+        largest = right
+
+    if largest != i:
+        arr[i], arr[largest] = arr[largest], arr[i]
+        heapify(arr, n, largest)
+
+def heap_sort(arr):
+    n = len(arr)
+
+    for i in range(n, -1, -1):
+        heapify(arr, n, i)
+
+    for i in range(n - 1, 0, -1):
+        arr[i], arr[0] = arr[0], arr[i]
+        heapify(arr, i, 0)
+
+# Example usage
+arr = [5, 2, 9, 1, 7]
+heap_sort(arr)
+print(arr)  # Output: [1, 2, 5, 7, 9]
+
+###############################################
+# Radix Sort
+
+def counting_sort(arr, exp):
+    n = len(arr)
+    output = [0] * n
+    count = [0] * 10
+
+    for i in range(n):
+        index = arr[i] // exp
+        count[index % 10] += 1
+
+    for i in range(1, 10):
+        count[i] += count[i - 1]
+
+    i = n - 1
+    while i >= 0:
+        index = arr[i] // exp
+        output[count[index % 10] - 1] = arr[i]
+        count[index % 10] -= 1
+        i -= 1
+
+    for i in range(n):
+        arr[i] = output[i]
+
+def radix_sort(arr):
+    max_val = max(arr)
+    exp = 1
+    while max_val // exp > 0:
+        counting_sort(arr, exp)
+        exp *= 10
+
+# Example usage
+arr = [170, 45, 75, 90, 802, 24, 2, 66]
+radix_sort(arr)
+print(arr)  # Output: [2, 24, 45, 66, 75, 90, 170, 802]
+
+###############################################
+# Counting Sort
+
+def counting_sort(arr):
+    max_val = max(arr)
+    count = [0] * (max_val + 1)
+
+    for num in arr:
+        count[num] += 1
+
+    i = 0
+    for j in range(max_val + 1):
+        while count[j] > 0:
+            arr[i] = j
+            count[j] -= 1
+            i += 1
+
+# Example usage
+arr = [5, 2, 9, 1, 7]
+counting_sort(arr)
+print(arr)  # Output: [1, 2, 5, 7, 9]
+
+###############################################
+# Breadth-First Search (BFS)
+
+from collections import deque
+
+def bfs(graph, start):
+    visited = set()
+    queue = deque([start])
+
+    while queue:
+        vertex = queue.popleft()
+        if vertex not in visited:
+            print(vertex)
+            visited.add(vertex)
+            queue.extend(graph[vertex] - visited)
+
+# Example usage
+graph = {
+    'A': {'B', 'C'},
+    'B': {'A', 'D', 'E'},
+    'C': {'A', 'F'},
+    'D': {'B'},
+    'E': {'B', 'F'},
+    'F': {'C', 'E'}
+}
+
+bfs(graph, 'A')
+
+###############################################
+# Depth-First Search (DFS)
+
+def dfs(graph, start, visited=None):
+    if visited is None:
+        visited = set()
+
+    visited.add(start)
+    print(start)
+
+    for neighbor in graph[start] - visited:
+        dfs(graph, neighbor, visited)
+
+# Example usage
+graph = {
+    'A': {'B', 'C'},
+    'B': {'A', 'D', 'E'},
+    'C': {'A', 'F'},
+    'D': {'B'},
+    'E': {'B', 'F'},
+    'F': {'C', 'E'}
+}
+
+dfs(graph, 'A')
+
+###############################################
+# Dijkstra's Algorithm
+
+import heapq
+
+def dijkstra(graph, start):
+    distances = {vertex: float('inf') for vertex in graph}
+    distances[start] = 0
+    pq = [(0, start)]
+
+    while pq:
+        current_distance, current_vertex = heapq.heappop(pq)
+
+        if current_distance > distances[current_vertex]:
+            continue
+
+        for neighbor, weight in graph[current_vertex].items():
+            distance = current_distance + weight
+            if distance < distances[neighbor]:
+                distances[neighbor] = distance
+                heapq.heappush(pq, (distance, neighbor))
+
+    print(distances)
+
+# Example usage
+graph = {
+    'A': {'B': 4, 'C': 2},
+    'B': {'A': 4, 'D': 2, 'E': 3},
+    'C': {'A': 2, 'F': 4},
+    'D': {'B': 2},
+    'E': {'B': 3, 'F': 1},
+    'F': {'C': 4, 'E': 1}
+}
+
+dijkstra(graph, 'A')
+
+###############################################
+# A* Search Algorithm
+
+import heapq
+
+def heuristic(node, goal):
+    # Calculate the heuristic value (e.g., Euclidean distance)
+    return abs(node[0] - goal[0]) + abs(node[1] - goal[1])
+
+def astar_search(graph, start, goal):
+    open_list = []
+    closed_set = set()
+    heapq.heappush(open_list, (0, start))
+    g_scores = {start: 0}
+
+    while open_list:
+        current_node = heapq.heappop(open_list)[1]
+
+        if current_node == goal:
+            print("Goal reached!")
+            return
+
+        closed_set.add(current_node)
+
+        for neighbor in graph[current_node]:
+            g_score = g_scores[current_node] + graph[current_node][neighbor]
+            if neighbor not in g_scores or g_score < g_scores[neighbor]:
+                g_scores[neighbor] = g_score
+                f_score = g_score + heuristic(neighbor, goal)
+                heapq.heappush(open_list, (f_score, neighbor))
+
+# Example usage
+graph = {
+    (0, 0): {(0, 1): 1, (1, 0): 1},
+    (0, 1): {(0, 0): 1, (1, 1): 2},
+    (1, 0): {(0, 0): 1, (1, 1): 1},
+    (1, 1): {(0, 1): 2, (1, 0): 1}
+}
+
+start_node = (0, 0)
+goal_node = (1, 1)
+
+astar_search(graph, start_node, goal_node)
+
+###############################################
+# Kruskal's Algorithm
+
+class DisjointSet:
+    def __init__(self, vertices):
+        self.parent = {vertex: vertex for vertex in vertices}
+        self.rank = {vertex: 0 for vertex in vertices}
+
+    def find(self, vertex):
+        if self.parent[vertex] != vertex:
+            self.parent[vertex] = self.find(self.parent[vertex])
+        return self.parent[vertex]
+
+    def union(self, vertex1, vertex2):
+        root1 = self.find(vertex1)
+        root2 = self.find(vertex2)
+
+        if root1 != root2:
+            if self.rank[root1] < self.rank[root2]:
+                self.parent[root1] = root2
+            elif self.rank[root1] > self.rank[root2]:
+                self.parent[root2] = root1
+            else:
+                self.parent[root2] = root1
+                self.rank[root1] += 1
+
+def kruskal(graph):
+    mst = set()
+    edges = list(graph.keys())
+    edges.sort(key=lambda edge: graph[edge])
+
+    disjoint_set = DisjointSet(graph.keys())
+
+    for edge in edges:
+        weight, vertex1, vertex2 = graph[edge]
+        if disjoint_set.find(vertex1) != disjoint_set.find(vertex2):
+            mst.add(edge)
+            disjoint_set.union(vertex1, vertex2)
+
+    print(mst)
+
+# Example usage
+graph = {
+    ('A', 'B'): 4,
+    ('A', 'C'): 2,
+    ('B', 'C'): 1,
+    ('B', 'D'): 5,
+    ('C', 'D'): 8,
+    ('C', 'E'): 10,
+    ('D', 'E'): 2,
+    ('D', 'F'): 6,
+    ('E', 'F'): 2
+}
+
+kruskal(graph)
+
+###############################################
+# Prim's Algorithm
+
+import heapq
+
+def prim(graph, start):
+    mst = []
+    visited = set([start])
+    edges = [
+        (cost, start, neighbor)
+        for neighbor, cost in graph[start].items()
+    ]
+    heapq.heapify(edges)
+
+    while edges:
+        cost, vertex1, vertex2 = heapq.heappop(edges)
+        if vertex2 not in visited:
+            visited.add(vertex2)
+            mst.append((vertex1, vertex2, cost))
+
+            for neighbor, cost in graph[vertex2].items():
+                if neighbor not in visited:
+                    heapq.heappush(edges, (cost, vertex2, neighbor))
+
+    return mst
+
+# Example usage
+graph = {
+    'A': {'B': 4, 'C': 2},
+    'B': {'A': 4, 'D': 2, 'E': 3},
+    'C': {'A': 2, 'F': 4},
+    'D': {'B': 2},
+    'E': {'B': 3, 'F': 1},
+    'F': {'C': 4, 'E': 1}
+}
+
+mst = prim(graph, 'A')
+print(mst)
+
+###############################################
+# Bellman-Ford Algorithm
+
+def bellman_ford(graph, start):
+    distances = {vertex: float('inf') for vertex in graph}
+    distances[start] = 0
+
+    for _ in range(len(graph) - 1):
+        for vertex in graph:
+            for neighbor, weight in graph[vertex].items():
+                new_distance = distances[vertex] + weight
+                if new_distance < distances[neighbor]:
+                    distances[neighbor] = new_distance
+
+    for vertex in graph:
+        for neighbor, weight in graph[vertex].items():
+            if distances[vertex] + weight < distances[neighbor]:
+                print("Negative cycle detected!")
+
+    return distances
+
+# Example usage
+graph = {
+    'A': {'B': -1, 'C': 4},
+    'B': {'C': 3, 'D': 2, 'E': 2},
+    'C': {},
+    'D': {'B': 1, 'C': 5},
+    'E': {'D': -3}
+}
+
+distances = bellman_ford(graph, 'A')
+print(distances)
+
+###############################################
+# Floyd-Warshall Algorithm
+
+def floyd_warshall(graph):
+    distances = dict(graph)
+
+    for k in graph:
+        for i in graph:
+            for j in graph:
+                distances[i][j] = min(
+                    distances[i][j],
+                    distances[i][k] + distances[k][j]
+                )
+
+    return distances
+
+# Example usage
+graph = {
+    'A': {'A': 0, 'B': 3, 'C': float('inf'), 'D': 7},
+    'B': {'A': 8, 'B': 0, 'C': 2, 'D': float('inf')},
+    'C': {'A': 5, 'B': float('inf'), 'C': 0, 'D': 1},
+    'D': {'A': 2, 'B': float('inf'), 'C': float('inf'), 'D': 0}
+}
+
+distances = floyd_warshall(graph)
+print(distances)
+
+###############################################
+# Topological Sort
+
+from collections import deque
+
+def topological_sort(graph):
+    in_degrees = {vertex: 0 for vertex in graph}
+    for vertex in graph:
+        for neighbor in graph[vertex]:
+            in_degrees[neighbor] += 1
+
+    queue = deque([vertex for vertex in graph if in_degrees[vertex] == 0])
+    result = []
+
+    while queue:
+        vertex = queue.popleft()
+        result.append(vertex)
+        for neighbor in graph[vertex]:
+            in_degrees[neighbor] -= 1
+            if in_degrees[neighbor] == 0:
+                queue.append(neighbor)
+
+    if len(result) == len(graph):
+        return result
+    else:
+        print("Graph has a cycle!")
+
+# Example usage
+graph = {
+    'A': {'B', 'C'},
+    'B': {'D'},
+    'C': {'D'},
+    'D': set()
+}
+
+sorted_order = topological_sort(graph)
+print(sorted_order)
+
+###############################################
+# Knapsack Problem (Dynamic Programming)
+
+def knapsack(weights, values, capacity):
+    n = len(weights)
+    dp = [[0] * (capacity + 1) for _ in range(n + 1)]
+
+    for i in range(1, n + 1):
+        for j in range(1, capacity + 1):
+            if weights[i - 1] <= j:
+                dp[i][j] = max(
+                    values[i - 1] + dp[i - 1][j - weights[i - 1]],
+                    dp[i - 1][j]
+                )
+            else:
+                dp[i][j] = dp[i - 1][j]
+
+    return dp[n][capacity]
+
+# Example usage
+weights = [2, 3, 4, 5]
+values = [3, 4, 5, 6]
+capacity = 7
+
+max_value = knapsack(weights, values, capacity)
+print(max_value)
+
+###############################################
+# Longest Common Subsequence (Dynamic Programming)
+
+def longest_common_subsequence(str1, str2):
+    m = len(str1)
+    n = len(str2)
+    dp = [[0] * (n + 1) for _ in range(m + 1)]
+
+    for i in range(1, m + 1):
+        for j in range(1, n + 1):
+            if str1[i - 1] == str2[j - 1]:
+                dp[i][j] = dp[i - 1][j - 1] + 1
+            else:
+                dp[i][j] = max(dp[i - 1][j], dp[i][j - 1])
+
+    return dp[m][n]
+
+# Example usage
+str1 = "AGGTAB"
+str2 = "GXTXAYB"
+
+lcs_length = longest_common_subsequence(str1, str2)
+print(lcs_length)
+
+###############################################
+# Minimum Spanning Tree (MST)
+
+class DisjointSet:
+    def __init__(self, vertices):
+        self.parent = {vertex: vertex for vertex in vertices}
+        self.rank = {vertex: 0 for vertex in vertices}
+
+    def find(self, vertex):
+        if self.parent[vertex] != vertex:
+            self.parent[vertex] = self.find(self.parent[vertex])
+        return self.parent[vertex]
+
+    def union(self, vertex1, vertex2):
+        root1 = self.find(vertex1)
+        root2 = self.find(vertex2)
+
+        if root1 != root2:
+            if self.rank[root1] < self.rank[root2]:
+                self.parent[root1] = root2
+            elif self.rank[root1] > self.rank[root2]:
+                self.parent[root2] = root1
+            else:
+                self.parent[root2] = root1
+                self.rank[root1] += 1
+
+def kruskal(graph):
+    mst = set()
+    edges = list(graph.keys())
+    edges.sort(key=lambda edge: graph[edge])
+
+    disjoint_set = DisjointSet(graph.keys())
+
+    for edge in edges:
+        weight, vertex1, vertex2 = graph[edge]
+        if disjoint_set.find(vertex1) != disjoint_set.find(vertex2):
+            mst.add(edge)
+            disjoint_set.union(vertex1, vertex2)
+
+    return mst
+
+# Example usage
+graph = {
+    ('A', 'B'): 4,
+    ('A', 'C'): 2,
+    ('B', 'C'): 1,
+    ('B', 'D'): 5,
+    ('C', 'D'): 8,
+    ('C', 'E'): 10,
+    ('D', 'E'): 2,
+    ('D', 'F'): 6,
+    ('E', 'F'): 2
+}
+
+mst = kruskal(graph)
+print(mst)
+
+###############################################
+# Graph Coloring
+
+def graph_coloring(graph):
+    colors = {}
+    result = {}
+
+    for node in graph:
+        available_colors = {1}
+        for neighbor in graph[node]:
+            if neighbor in colors:
+                available_colors.discard(colors[neighbor])
+        color = min(available_colors)
+        colors[node] = color
+        result[node] = color
+
+    return result
+
+# Example usage
+graph = {
+    'A': {'B', 'C'},
+    'B': {'A', 'D', 'E'},
+    'C': {'A', 'F'},
+    'D': {'B'},
+    'E': {'B', 'F'},
+    'F': {'C', 'E'}
+}
+
+coloring = graph_coloring(graph)
+print(coloring)
+
+###############################################
+# K-means Clustering
+
+import random
+
+def euclidean_distance(point1, point2):
+    return sum((x - y) ** 2 for x, y in zip(point1, point2)) ** 0.5
+
+def kmeans_clustering(points, k, max_iterations=100):
+    centroids = random.sample(points, k)
+    clusters = [[] for _ in range(k)]
+
+    for _ in range(max_iterations):
+        for point in points:
+            distances = [euclidean_distance(point, centroid) for centroid in centroids]
+            cluster_index = distances.index(min(distances))
+            clusters[cluster_index].append(point)
+
+        new_centroids = []
+        for cluster in clusters:
+            cluster_size = len(cluster)
+            cluster_sum = [sum(point[i] for point in cluster) for i in range(len(cluster[0]))]
+            new_centroids.append([coord / cluster_size for coord in cluster_sum])
+
+        if new_centroids == centroids:
+            break
+
+        centroids = new_centroids
+        clusters = [[] for _ in range(k)]
+
+    return clusters
+
+# Example usage
+points = [(1, 2), (1, 4), (2, 2), (2, 4), (4, 1), (4, 2), (4, 4)]
+k = 2
+
+clusters = kmeans_clustering(points, k)
+print(clusters)
+
+###############################################
+# Convex Hull (Graham's Scan)
+
+def orientation(p, q, r):
+    val = (q[1] - p[1]) * (r[0] - q[0]) - (q[0] - p[0]) * (r[1] - q[1])
+
+    if val == 0:
+        return 0
+    elif val > 0:
+        return 1
+    else:
+        return 2
+
+def graham_scan(points):
+    n = len(points)
+    if n < 3:
+        return []
+
+    hull = []
+    leftmost_point = min(points, key=lambda point: point[0])
+    hull.append(leftmost_point)
+    current_point = leftmost_point
+
+    while True:
+        next_point = (current_point[0], current_point[1] - 1)
+        for point in points:
+            if point != current_point and point != next_point and orientation(current_point, next_point, point) == 2:
+                next_point = point
+
+        if next_point == leftmost_point:
+            break
+
+        hull.append(next_point)
+        current_point = next_point
+
+    return hull
+
+# Example usage
+points = [(0, 3), (2, 2), (1, 1), (2, 1), (3, 0), (0, 0), (3, 3)]
+convex_hull = graham_scan(points)
+print(convex_hull)
+
+###############################################

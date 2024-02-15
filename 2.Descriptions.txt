@@ -1,0 +1,101 @@
+Here are brief descriptions of each algorithm and when to use them:
+
+Linear Search:
+Description: Sequentially checks each element in a list until a match is found.
+When to use: Suitable for small lists or unsorted data.
+
+Binary Search:
+Description: Divides a sorted list into halves, reducing the search space by half with each comparison.
+When to use: Applicable for large, sorted datasets to efficiently find an element.
+
+Bubble Sort:
+Description: Repeatedly swaps adjacent elements until the list is sorted.
+When to use: Practical for small datasets or educational purposes, not efficient for large datasets.
+
+Selection Sort:
+Description: Iteratively selects the minimum element and places it at the beginning.
+When to use: Simple to implement, suitable for small datasets.
+
+Insertion Sort:
+Description: Builds a sorted list one element at a time by repeatedly inserting elements into the sorted part.
+When to use: Efficient for small datasets or partially sorted lists.
+
+Merge Sort:
+Description: Divides the list into halves, recursively sorts each half, and merges them.
+When to use: Efficient for large datasets, guarantees O(n log n) time complexity.
+
+Quick Sort:
+Description: Chooses a pivot, partitions the list, and recursively sorts the partitions.
+When to use: Efficient for large datasets, in-place sorting with good average-case performance.
+
+Heap Sort:
+Description: Builds a max-heap and repeatedly extracts the maximum element.
+When to use: Suitable for large datasets, in-place sorting with O(n log n) complexity.
+
+Radix Sort:
+Description: Sorts integers by processing individual digits, from the least to the most significant.
+When to use: Suitable for sorting integers with fixed lengths, linear time complexity.
+
+Counting Sort:
+Description: Counts the occurrences of each element and reconstructs a sorted list.
+When to use: Efficient for a range of integers, linear time complexity.
+
+Breadth-First Search (BFS):
+Description: Explores all neighbors at the current depth before moving to the next level.
+When to use: Shortest path problems, level-order traversal in graphs.
+
+Depth-First Search (DFS):
+Description: Explores as far as possible along each branch before backtracking.
+When to use: Topological sorting, maze solving, connected components in graphs.
+
+Dijkstra's Algorithm:
+Description: Finds the shortest path from a source node to all other nodes in a weighted graph.
+When to use: Single-source shortest path in weighted graphs with non-negative edges.
+
+A Search Algorithm:
+Description: An informed search algorithm that uses heuristics to efficiently find the shortest path.
+When to use: Pathfinding in graphs with an estimate of the remaining cost.
+
+Kruskal's Algorithm:
+Description: Constructs a minimum spanning tree by adding edges in ascending order of weight.
+When to use: Finding the minimum spanning tree in a connected, weighted graph.
+
+Prim's Algorithm:
+Description: Builds a minimum spanning tree by selecting the smallest edge at each step.
+When to use: Finding the minimum spanning tree in a connected, weighted graph.
+
+Bellman-Ford Algorithm:
+Description: Finds the shortest paths from a source node to all other nodes in a weighted graph.
+When to use: Single-source shortest paths, handles graphs with negative weights.
+
+Floyd-Warshall Algorithm:
+Description: Finds the shortest paths between all pairs of nodes in a weighted graph.
+When to use: All-pairs shortest paths in graphs with both positive and negative weights.
+
+Topological Sort:
+Description: Arranges nodes in a directed acyclic graph in a linear order.
+When to use: Dependency resolution, task scheduling with prerequisites.
+
+Knapsack Problem (Dynamic Programming):
+Description: Finds the most valuable combination of items within a weight limit.
+When to use: Optimization problems where items have weights and values.
+
+Longest Common Subsequence (Dynamic Programming):
+Description: Finds the longest subsequence common to two sequences.
+When to use: String comparison, DNA sequence analysis.
+
+Minimum Spanning Tree (MST):
+Description: Finds the minimum weight set of edges that connects all nodes in a graph.
+When to use: Network design, ensuring connectivity with minimum cost.
+
+Graph Coloring:
+Description: Assigns colors to vertices of a graph such that no two adjacent vertices have the same color.
+When to use: Scheduling, register allocation in compilers.
+
+K-means Clustering:
+Description: Divides a set of data points into k clusters based on their features.
+When to use: Unsupervised machine learning for clustering.
+
+Convex Hull (Graham's Scan):
+Description: Finds the smallest convex polygon that contains all given points.
+When to use: Computational geometry, pattern recognition.

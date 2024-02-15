@@ -1,0 +1,78 @@
+def display_help(algorithm_name, descriptions, use_cases):
+    if algorithm_name in descriptions and algorithm_name in use_cases:
+        print("Description:", descriptions[algorithm_name])
+        print("When to use:", use_cases[algorithm_name])
+    else:
+        print("Help information not available for the selected algorithm.")
+
+def main():
+    algorithms = [
+        "Linear Search",
+        "Binary Search",
+        "Bubble Sort",
+        "Selection Sort",
+        "Insertion Sort",
+        "Merge Sort",
+        "Quick Sort",
+        "Heap Sort",
+        "Radix Sort",
+        "Counting Sort",
+        "Breadth-First Search (BFS)",
+        "Depth-First Search (DFS)",
+        "Dijkstra's Algorithm",
+        "A* Search Algorithm",
+        "Kruskal's Algorithm",
+        "Prim's Algorithm",
+        "Bellman-Ford Algorithm",
+        "Floyd-Warshall Algorithm",
+        "Topological Sort",
+        "Knapsack Problem (Dynamic Programming)",
+        "Longest Common Subsequence (Dynamic Programming)",
+        "Minimum Spanning Tree (MST)",
+        "Graph Coloring",
+        "K-means Clustering",
+        "Convex Hull (Graham's Scan)"
+    ]
+
+    algorithm_descriptions = {
+        "Linear Search": "Sequentially checks each element in a list until a match is found.",
+        "Binary Search": "Divides a sorted list into halves, reducing the search space by half with each comparison.",
+        # Add descriptions for other algorithms
+    }
+
+    algorithm_use_cases = {
+        "Linear Search": "Suitable for small lists or unsorted data.",
+        "Binary Search": "Applicable for large, sorted datasets to efficiently find an element.",
+        # Add use cases for other algorithms
+    }
+
+    print("Choose an algorithm to execute:")
+    for i, algorithm in enumerate(algorithms, 1):
+        print(f"{i}. {algorithm}")
+
+    choice = int(input("Enter the number of the algorithm or enter --h for help: "))
+
+if algorithm_name == "--h":
+            display_help(input("Enter the algorithm name: "), algorithm_descriptions, algorithm_use_cases)
+
+    if 1 <= choice <= len(algorithms):
+        algorithm_index = choice - 1
+        algorithm_name = algorithms[algorithm_index]
+        print(f"\nExecuting {algorithm_name}...\n")
+
+        if algorithm_name == "Linear Search":
+            arr = list(map(int, input("Enter the array (space-separated): ").split()))
+            target = int(input("Enter the target value: "))
+            result = linear_search(arr, target)
+            print(f"Result: {result}")
+
+        else:
+            print("Algorithm not implemented in the main program.")
+    else:
+        print("Invalid choice. Please enter a number between 1 and", len(algorithms))
+
+
+# Rest of your code for the algorithms and functions...
+
+if __name__ == "__main__":
+    main()
